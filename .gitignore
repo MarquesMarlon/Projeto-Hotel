@@ -1,0 +1,12 @@
+# Node / JavaScript
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# IDE / Sistema
+.vscode/
+.DS_Store
+Thumbs.db
