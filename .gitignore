@@ -10,3 +10,6 @@ build/
 .vscode/
 .DS_Store
 Thumbs.db
+
+#extensão Local history do VSCode
+.history/
