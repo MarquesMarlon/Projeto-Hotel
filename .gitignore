@@ -6,6 +6,10 @@ build/
 # Logs
 *.log
 
+#php
+vendor/ 
+*.env 
+
 # IDE / Sistema
 .vscode/
 .DS_Store
