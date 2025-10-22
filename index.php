@@ -99,7 +99,7 @@ define('ROOT_PATH', __DIR__);
             <img src="assets/img/Restauranteicon.png" alt="restaurante" class="icon-food" />
           </div>
           <div class="card-info">
-            <h4 class">Restaurante</h4>
+            <h4>Restaurante</h4>
             <p>Lorem ipsum dolor sit piscing sed nonmy</p>
           </div>
         </div>
@@ -169,7 +169,7 @@ define('ROOT_PATH', __DIR__);
           <img src="assets/img/acomodacoes/casal01.png" alt="Casal 01" class="acomodacao-img">
         </div>
         <div class="acomodacao-info">
-          <img src="assets/img/acomodacoes/Border.png/" alt="border" class="acomodacao-border">
+          <img src="assets/img/acomodacoes/Border.png" alt="border" class="acomodacao-border">
           <div class="container-info">
             <div>
               <span class="acomodacao-preco">R$ 299,00/NOITE</span>

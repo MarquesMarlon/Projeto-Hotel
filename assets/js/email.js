@@ -3,8 +3,14 @@
 const form = document.getElementById('email-newsletter');
 const inputEmail = document.getElementById('email-input');
 const errorMessage = document.getElementById('error-message');
-const modal = document.getElementById('modal');
-const closeModalBtn = document.getElementById('close-modal');
+// Newsletter modal elements renamed to avoid Bootstrap conflict
+const modal = document.getElementById('modal-newsletter');
+const closeModalBtn = document.getElementById('close-modal-news');
+
+// If elements missing on the current page, don't run the newsletter logic
+if (!form || !inputEmail || !errorMessage) {
+    // nothing to do on pages without newsletter
+} else {
 
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,7 +19,7 @@ function isValidEmail(email) {
 
 
 //obter o valor, mostra mensagem de erro e validação
-form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', function (event) {
     event.preventDefault();
     const email = inputEmail.value.trim();
 
@@ -27,22 +33,26 @@ form.addEventListener('submit', function (event) {
         inputEmail.focus();
         return;
     }
-    errorMessage.textContent = '';
-    form.reset();
-    showModal();
-});
+        errorMessage.textContent = '';
+        form.reset();
+        if (modal) showModal();
+    });
 
-function showModal() {
-    modal.classList.remove('hidden');
-    modal.setAttribute('aria-hidden','false');
-    closeModalBtn.focus();
+    function showModal() {
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        modal.setAttribute('aria-hidden','false');
+        if (closeModalBtn) closeModalBtn.focus();
+    }
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click',() => {
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+            inputEmail.focus();
+        });
+    }
 }
-
-closeModalBtn.addEventListener('click',() => {
-    modal.classList.add('hidden');
-    modal.setAttribute('aria-hidden', 'true');
-    inputEmail.focus();
-});
 
 // header com Efeito Scroll
 

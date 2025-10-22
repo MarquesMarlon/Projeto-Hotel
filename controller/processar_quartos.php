@@ -21,7 +21,8 @@
                 $tipo = $_POST['tipo'];
                 $preco = $_POST['preco'];
                 $descricao = $_POST['descricao'] ?? '';
-                $ativo = isset($_POST['ativo']) ? 1 : 0;
+              
+                $ativo = (!empty($_POST['ativo']) && $_POST['ativo'] !== '0') ? 1 : 0;
 
                 $sql = "INSERT INTO quartos (numero, tipo, preco, descricao, ativo) VALUES (?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
@@ -37,13 +38,13 @@
                 $tipo = $_POST['tipo'];
                 $preco = $_POST['preco'];
                 $descricao = $_POST['descricao'] ?? '';
-                $ativo = isset($_POST['ativo']) ? 1 : 0;
+                $ativo = (!empty($_POST['ativo']) && $_POST['ativo'] !== '0') ? 1 : 0;
 
                 $sql = "UPDATE quartos SET numero = ?, tipo = ?, preco = ?, descricao = ?, ativo = ? WHERE id = ?";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$numero, $tipo, $preco, $descricao, $ativo, $id]);
 
-                header('Location: sucesso_quarto.php?action=update');
+                header('Location: /projetohotel/sucesso.php?action=update');
                 break;
 
             case 'delete':
@@ -53,7 +54,7 @@
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$id]);
 
-                header('Location: sucesso_quarto.php?action=delete');
+                header('Location: /projetohotel/sucesso.php?action=delete');
                 break;
 
             default:
@@ -64,5 +65,3 @@
         echo "<a href='quartos.php'>Voltar</a>";
     }
     ?>
-
-   <!-- Fim Inicio processar_quartos !>

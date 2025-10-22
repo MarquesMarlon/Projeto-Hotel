@@ -6,44 +6,56 @@
 
 html,
 body {
-  min-height: 100vh;
+  background-color: transparent;
   margin: 0;
   padding: 0;
-  background-color: #fff;
-  height: 3000px;
 }
 
 /* Barra de Cima */
 
 .banner {
-  background-image: url(Fotos/Cabecalhofoto.png);
+  background-image: url("../img/banner-1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 1000px;
+  min-height: 1200px;
 }
 
 .navbar {
-  color: #fff;
-  font-size: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: transparent;
+  transition: background-color 200ms ease, box-shadow 200ms ease, padding 200ms ease;
+  padding: 18px 0;
+  display: block;
 }
 
+
 .container-navbar {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+max-width: 1200px;
+margin: 0;
+}
+
+.header-bg {
+  box-shadow: 0 6px 20px rgba(18, 18, 18, 0.4);
+  padding: 12px 0;
 }
 
 .logo-navbar {
   width: 135px;
   height: 28px;
+  display: block;
 }
 
 .navbar .container-navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+
 }
 
 .nav-links li {
@@ -222,14 +234,6 @@ body {
   color: rgba(38, 36, 35, 1);
 }
 
-label {
-  font-family: Roboto;
-  font-style: Regular;
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  margin-bottom: 10px;
-}
-
 .container-home {
   max-width: 1200px;
   margin: 0 auto;
@@ -243,7 +247,7 @@ label {
 .container-central {
   padding-top: 100px;
   max-width: 1146px;
-  margin: 0 auto;      
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   gap: 24px;
@@ -253,10 +257,8 @@ label {
   position: relative;
 }
 
-
 .text-sobre1-transparente {
   font-family: DM Serif Text;
-  font-style: Regular;
   font-size: 80px;
   line-height: 46px;
   vertical-align: middle;
@@ -312,7 +314,7 @@ label {
   padding-top: 30px;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  
+
 
 }
 
@@ -473,14 +475,18 @@ label {
 /* Cards de acomodações */
 .acomodacoes-cards {
   display: flex;
-  gap: 50px;
+  flex-wrap: wrap;
+  gap: px;
   justify-content: center;
+  justify-content:space-around;
   margin: 50px 0 0 0;
   position: relative;
   width: 100%;
 }
 
 .acomodacao-card {
+  flex: 1 1 300px;
+  max-width: 370px;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -488,16 +494,16 @@ label {
 }
 
 .acomodacao-border {
-  width: 570px;
-  height: 360px;
+  height: auto;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
 
 .acomodacao-img {
   z-index: 2;
-  width: 570px;
-  height: 360px;
+  height: auto;
+  width: 100%;
 }
 
 .acomodacao-info {
@@ -735,4 +741,32 @@ footer {
 .direitos p {
   color: #B7B7B7;
   text-align: center;
+}
+
+
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
 }

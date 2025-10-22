@@ -1,4 +1,5 @@
-<!-- Este arquivo aqui é a parte do front, que o clinte vê -->
+
+ <!-- CADASTRAR NOVO QUARTO -->
 <?php
 define('ROOT_PATH', __DIR__);
 require_once ROOT_PATH . '/model/quarto.php';
@@ -41,7 +42,7 @@ if (isset($_GET['id'])) {
 
                     <div class="mb-3">
                         <label for="numero" class="form-label">Número do Quarto *</label>
-                        <input type="text" class="form-control" id="numero" name="numero"
+                        <input type="number" class="form-control" id="numero" name="numero"
                             value="" required>
                     </div>
 
@@ -65,7 +66,7 @@ if (isset($_GET['id'])) {
                         <label for="descricao" class="form-label">Descrição</label>
                         <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
                     </div>
-
+                    
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="ativo" name="ativo" value="1"
@@ -76,7 +77,7 @@ if (isset($_GET['id'])) {
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary"><?= $isEdit ? 'Salvar Alterações' : 'Cadastrar' ?></button>
-                    <a href="quartos.php" class="btn btn-secondary">Cancelar</a>
+                    <a href="quartos-gerenciar.php" class="btn btn-secondary">Cancelar</a>
                 </form>
             </div>
         </div>

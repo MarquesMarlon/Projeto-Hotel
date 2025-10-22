@@ -18,10 +18,11 @@
         </form>
       </div>
     </div>
-    <div id="modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
-      <div class="modal-content">
-        <h2 id="modal-title">Inscrição realizada com sucesso!</h2>
-        <button id="close-modal" aria-label="Fechar modal">Fechar</button>
+    <!-- Newsletter modal (nome e classes alterados para não conflitar com Bootstrap) -->
+    <div id="modal-newsletter" class="newsletter-modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-newsletter-title">
+      <div class="newsletter-modal-content">
+        <h2 id="modal-newsletter-title">Inscrição realizada com sucesso!</h2>
+        <button id="close-modal-news" aria-label="Fechar modal">Fechar</button>
       </div>
     </div>
     <script src="assets/js/email.js"></script>
