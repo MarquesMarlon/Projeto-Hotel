@@ -1,6 +1,4 @@
-<!-- Conexão com banco hoteldb do mysqladmin -->
 <?php
-
 class Conexao {
     private $host = 'localhost';
     private $dbname = 'hotel_reservas';

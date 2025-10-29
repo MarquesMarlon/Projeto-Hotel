@@ -151,15 +151,13 @@ margin: 0;
   width: 165px;
   height: 38px;
   appearance: none;
-  /* Remove estilo padrão */
   background-color: white;
   border: none;
   padding: 10px 40px 10px 12px;
-  /* Espaço interno */
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 12px center;
-  /* seta afastada da borda */
+
 
 }
 
@@ -200,7 +198,7 @@ margin: 0;
   /* seta afastada da borda */
 }
 
-.list-botom {
+#list-botom {
   background-color: rgba(38, 36, 35, 1);
   color: rgba(255, 255, 255, 1);
   width: 100px;
@@ -217,7 +215,7 @@ margin: 0;
   margin: 25px 0 0 20px;
 }
 
-.list-botom:hover {
+#list-botom:hover {
   background-color: #303030;
   transition: 0.8s;
 }

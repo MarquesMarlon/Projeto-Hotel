@@ -38,7 +38,11 @@ if (isset($_GET['id'])) {
                         <input type="hidden" name="action" value="create">
                     <?php endif; ?>
 
-
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome do Quarto * <i>(Visivel para o Cliente)</i></label>
+                        <input type="text" class="form-control" id="nome" name="nome"
+                            value="" required>
+                    </div>
 
                     <div class="mb-3">
                         <label for="numero" class="form-label">Número do Quarto *</label>

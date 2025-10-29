@@ -1,5 +1,6 @@
 <?php
-define('ROOT_PATH', __DIR__); 
+define('ROOT_PATH', __DIR__);
+require_once ROOT_PATH . '/model/reserva.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,14 +9,15 @@ define('ROOT_PATH', __DIR__);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projeto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css" />
+   <link rel="stylesheet" href="assets/css/modal-reserva.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
-
+  <link rel="stylesheet" href="assets/css/correcao-modal.css">
 </head>
 <!-- NAVBAR-->
 
@@ -26,56 +28,77 @@ define('ROOT_PATH', __DIR__);
         <img src="assets/img/logo-header.png" alt="sharai" class="logo-navbar" />
         <ul class="nav-links">
           <li><a href="#">Home</a></li>
-          <li><a href="#">Post detail</a></li>
-          <li><a href="#">Pages</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Shortcodes</a></li>
+          <li><a href="#">Sobre</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Área Administrativa</a></li>
         </ul>
       </div>
-
     </div>
     <div class="banner"></div>
   </header>
-  <!-- RESERVA   -->
-  <div class="container-reserva">
-    <h3 class="reserva-text">Reserva</h3>
-    <div class="reserva-list">
-      <div class="list-item">
-        <label for="">Entrada/Saida </label>
-        <div class="input-grupo">
-          <span class="seta">➜</span>
-          <input type="text" class="reserva-entrada" placeholder="Entrada">
-          <span class="seta">➜</span>
-          <input type="text" class="reserva-saida" placeholder="Saida">
+  <!-- RESERVA  -->
+  <form id="reserva-form" action="" method="POST">
+    <div class="container-reserva">
+      <h3 class="reserva-text">Reserva</h3>
+      <div class="reserva-list">
+        <div class="list-item">
+
+          <label for="dataEntrada">Entrada/Saida </label>
+          <div class="input-grupo">
+            <span class="seta">➜</span>
+            <input type="date" id="reserva-entrada" placeholder="Entrada" required>
+
+
+            <span class="seta">➜</span>
+            <input type="date" id="reserva-saida" placeholder="Saida" required>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="list-item">
+        <label for="quarto">Quarto</label>
+        <select name="reserva-quarto" class="reserva-quarto" required>
+          <option value="">Selecione o quarto</option>
+          <?php
+          require_once __DIR__ . '/config/conexaobd.php';
+          $conexao = new Conexao();
+          $con = $conexao->getPdo();
+          $stmt = $con->prepare("SELECT id, nome FROM quartos WHERE ativo = 1 ORDER BY nome ASC");
+          $stmt->execute();
+          $quartos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    <div class="list-item">
-      <label for="">Quarto</label>
-      <select name="reserva-quarto" class="reserva-quarto">
-        <option value="1">Quarto</option>
-        <option value="2">Sala</option>
-        <option value="3">Cozinha</option>
-      </select>
-    </div>
+          foreach ($quartos as $q) {
+            echo "<option value='{$q['id']}'>{$q['nome']}</option>";
+          }
+          ?>
+        </select>
+      </div>
 
-    <div class="list-item">
-      <label for="">Adulto</label>
-      <select name="reserva-adulto" id="" class="reserva-adulto">
-        <option value="1">Adulto</option>
-      </select>
-    </div>
+      <div class="list-item">
+        <label for="">Adulto</label>
+        <select name="reserva-adulto" id="" class="reserva-adulto" required>
+          <option value="">Selecione</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
 
-    <div class="list-item">
-      <label for="">Criança</label>
-      <select name="reserva-crianca" id="" class="reserva-crianca">
-        <option value="1">Criança</option>
-      </select>
-    </div>
+      <div class="list-item">
+        <label for="crianca">Criança</label>
+        <select name="reserva-crianca" id="" class="reserva-crianca" required>
+          <option value="">Selecione</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
 
-    <button class="list-botom">ENVIAR</button>
-
+      <button type="submit" id="list-botom">RESERVAR</button>
+  </form>
   </div>
 
   <div class="container-central">
@@ -202,7 +225,7 @@ define('ROOT_PATH', __DIR__);
       </div>
       <div class="acomodacao-card">
         <div class="acomodacao-img">
-          <img src="assets/img/acomodacoes/casal02.png"  alt="Casal 02" class="acomodacao-img">
+          <img src="assets/img/acomodacoes/casal02.png" alt="Casal 02" class="acomodacao-img">
         </div>
         <div class="acomodacao-info">
           <img src="assets/img/acomodacoes/Border.png" alt="borer" class="acomodacao-border">
@@ -322,12 +345,16 @@ define('ROOT_PATH', __DIR__);
   <div class="direitos">
     <p>© 2024 Your Company. Designed By Jafe</p>
   </div>
-  <div id="modal" class="modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
+  <!-- modal estático renomeado para evitar conflito com Bootstrap (.modal) -->
+  <div id="modal" class="static-modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
     <div class="modal-content">
       <h2 id="modal-title">Inscrição realizada com sucesso!</h2>
       <button id="close-modal" aria-label="Fechar modal">Fechar</button>
     </div>
   </div>
+  <script src="assets/js/validacoes-reserva.js"></script>
+  <script src="assets/js/reserva.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/email.js"></script>
 </body>
 

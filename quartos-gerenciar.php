@@ -23,9 +23,10 @@ require_once 'config/conexaobd.php'
 
    <div class="container mt-5">
       <div class="row">
-         <h2 class="col-sm text-start">Gerenciar Quartos</h2>
+         <h2 class="col-sm text-start"><i>Área Administrativa</i> | Gerenciar Quartos</h2>
          <div class="col-sm text-end">
-            <a href="quarto.php" class="btn btn-success mb-3"> Novo Quarto </a>
+            <a href="reservas-gerenciar.php" class="btn btn-primary me-3 "> Gerenciar Reservas </a>
+            <a href="quarto.php" class="btn btn-success "> Novo Quarto </a>
          </div>
       </div>
    </div>
@@ -36,6 +37,7 @@ require_once 'config/conexaobd.php'
          <thead>
             <tr>
                <th>ID</th>
+               <th>Nome</th>
                <th>Número</th>
                <th>Tipo</th>
                <th>Preço</th>
@@ -64,16 +66,20 @@ require_once 'config/conexaobd.php'
                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                   echo "<tr>";
                   echo "<td>" . $row['id'] . "</td>";
+                  echo "<td>" . $row['nome'] . "</td>";
                   echo "<td>" . $row['numero'] . "</td>";
                   echo "<td>" . $row['tipo'] . "</td>";
                   echo "<td>R$ " . number_format($row['preco'], 2, ',', '.') . "</td>";
                   echo "<td>" . traduzStatus($row['ativo']) . "</td>";
+                  $datanome = htmlspecialchars($row['nome'], ENT_QUOTES);
                   $dataNumero = htmlspecialchars($row['numero'], ENT_QUOTES);
                   $dataTipo = htmlspecialchars($row['tipo'], ENT_QUOTES);
                   $dataPreco = htmlspecialchars($row['preco'], ENT_QUOTES);
                   $dataAtivo = htmlspecialchars($row['ativo'], ENT_QUOTES);
                   echo "<td>
-                                 <button type='button' class='btn btn-primary btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#editModal' data-id='{$row['id']}' data-numero='{$dataNumero}' data-tipo='{$dataTipo}' data-preco='{$dataPreco}' data-ativo='{$dataAtivo}'> Editar </button>
+                                 <button type='button' class='btn btn-primary btn-sm edit-btn' data-bs-toggle='modal' data-bs-target='#editModal' data-id='{$row['id']}' data-nome='{$datanome}' data-numero='{$dataNumero}' data-tipo='{$dataTipo}' data-preco='{$dataPreco}' data-ativo='{$dataAtivo}'> Editar </button>
+
+
                                  <button type='button' onclick=\"if(confirm('Tem certeza que deseja excluir o quarto número {$row['numero']}?')){ window.location.href='controller/processar_quartos.php?action=delete&id={$row['id']}'; }\" class='btn btn-danger btn-sm'>Excluir</button>
                                
                               </td>";
@@ -102,6 +108,11 @@ require_once 'config/conexaobd.php'
                <form id="editForm" method="post" action="controller/processar_quartos.php">
                   <input type="hidden" id="edit-id" name="id">
                   <input type="hidden" name="action" value="update">
+
+                  <div class="mb-3">
+                     <label for="edit-nome" class="form-label"><b>Nome</b></label>
+                     <input type="text" class="form-control" id="edit-nome" name="nome" required>
+                  </div>
                   <div class="mb-3">
                      <label for="edit-numero" class="form-label"><b>Número</b></label>
                      <input type="number" class="form-control" id="edit-numero" name="numero" required>
@@ -114,9 +125,6 @@ require_once 'config/conexaobd.php'
                         <option value="Suíte">Suíte</option>
                      </select>
                   </div>
-                  <!-- quero colocar select aqui -->
-
-
                   <div class="mb-3">
                      <label for="edit-preco" class="form-label"><b>Preço</b></label>
                      <input type="text" class="form-control" id="edit-preco" name="preco" required>

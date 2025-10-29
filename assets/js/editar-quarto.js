@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     editModalElement.addEventListener('show.bs.modal', function (event) {
         const button = event.relatedTarget;
         const id = button.getAttribute('data-id');
+        const nome = button.getAttribute('data-nome') || '';
         const numero = button.getAttribute('data-numero') || '';
         const tipo = button.getAttribute('data-tipo') || '';
         const preco = button.getAttribute('data-preco') || '';
@@ -16,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         form.reset();
 
         document.getElementById('edit-id').value = id;
+        document.getElementById('edit-nome').value = nome; 
         document.getElementById('edit-numero').value = numero;
         document.getElementById('edit-tipo').value = tipo;
-    
         document.getElementById('edit-preco').value = preco;
 
         if (typeof ativo !== 'undefined' && ativo !== null) {

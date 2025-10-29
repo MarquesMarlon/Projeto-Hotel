@@ -1,7 +1,8 @@
-<!-- Este arquivo aqui é o cerebro dos Quartos -->
+<!-- Este arquivo aqui é o cerebro das RESERVAS -->
+
 <?php
 require_once 'config/conexaobd.php';
-class Quarto
+class Reserva
 {
     private $pdo;
 
@@ -13,15 +14,18 @@ class Quarto
 
     public function listarTodos()
     {
-        $stmt = $this->pdo->query("SELECT * FROM quartos WHERE ativo = 1 ORDER BY numero");
+        $stmt = $this->pdo->query("SELECT * FROM reservas ORDER BY data_checkin DESC");
         return $stmt->fetchAll();
     }
 
     public function buscarPorId($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM quartos WHERE id = :id AND ativo = 1");
+        $stmt = $this->pdo->prepare("SELECT * FROM reservas WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
     }
 }
+
+
+?>

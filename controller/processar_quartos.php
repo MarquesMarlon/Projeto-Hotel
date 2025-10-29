@@ -17,6 +17,7 @@
 
         switch ($action) {
             case 'create':
+                $nome = $_POST['nome'];
                 $numero = $_POST['numero'];
                 $tipo = $_POST['tipo'];
                 $preco = $_POST['preco'];
@@ -24,9 +25,9 @@
               
                 $ativo = (!empty($_POST['ativo']) && $_POST['ativo'] !== '0') ? 1 : 0;
 
-                $sql = "INSERT INTO quartos (numero, tipo, preco, descricao, ativo) VALUES (?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO quartos (nome, numero, tipo, preco, descricao, ativo) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([$numero, $tipo, $preco, $descricao, $ativo]);
+                $stmt->execute([$nome, $numero, $tipo, $preco, $descricao, $ativo]);
 
                 header('Location: /projetohotel/sucesso.php?action=create'); 
                 break;
@@ -34,15 +35,16 @@
 
             case 'update':
                 $id = $_POST['id'];
+                $nome = $_POST['nome'];
                 $numero = $_POST['numero'];
                 $tipo = $_POST['tipo'];
                 $preco = $_POST['preco'];
                 $descricao = $_POST['descricao'] ?? '';
                 $ativo = (!empty($_POST['ativo']) && $_POST['ativo'] !== '0') ? 1 : 0;
 
-                $sql = "UPDATE quartos SET numero = ?, tipo = ?, preco = ?, descricao = ?, ativo = ? WHERE id = ?";
+                $sql = "UPDATE quartos SET nome = ?, numero = ?, tipo = ?, preco = ?, descricao = ?, ativo = ? WHERE id = ?";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([$numero, $tipo, $preco, $descricao, $ativo, $id]);
+                $stmt->execute([$nome, $numero, $tipo, $preco, $descricao, $ativo, $id]);
 
                 header('Location: /projetohotel/sucesso.php?action=update');
                 break;
