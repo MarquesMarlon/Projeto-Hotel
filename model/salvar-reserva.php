@@ -143,13 +143,82 @@ try {
         // Ajuste o From para um e-mail válido do seu domínio/servidor
         $headers .= "From: Reservas <reservas@seudominio.com>" . "\r\n";
 
-        // Tenta enviar o e-mail. Em muitos ambientes locais (XAMPP) o mail() pode não estar configurado.
+        // Envio de e-mail: prioriza variáveis de ambiente (para facilitar testes/CI),
+        // senão carrega `config/smtp_config.php`. Se PHPMailer/Composer estiver disponível
+        // e as configurações estiverem completas, envia por SMTP via PHPMailer.
         $mailSent = false;
-        try {
-            $mailSent = @mail($to, $subject, $message, $headers);
-        } catch (Exception $e) {
-            // falha ao chamar mail(); mantém $mailSent = false e loga
-            error_log('Erro ao enviar e-mail de confirmação: ' . $e->getMessage());
+        $vendorAutoload = __DIR__ . '/../vendor/autoload.php';
+        $smtpConfigFile = __DIR__ . '/../config/smtp_config.php';
+
+        // Lê variáveis de ambiente (se definidas)
+        $smtpHost = getenv('SMTP_HOST') ?: null;
+        $smtpUsername = getenv('SMTP_USERNAME') ?: null;
+        $smtpPassword = getenv('SMTP_PASSWORD') ?: null;
+        $smtpPort = getenv('SMTP_PORT') ?: null;
+        $smtpEncryption = getenv('SMTP_ENCRYPTION') ?: null;
+        $mailFromEmail = getenv('MAIL_FROM_EMAIL') ?: null;
+        $mailFromName = getenv('MAIL_FROM_NAME') ?: null;
+
+        // Se env vars não fornecidas, tenta carregar arquivo de configuração
+        if (!$smtpHost && file_exists($smtpConfigFile)) {
+            require_once $smtpConfigFile;
+            $smtpHost = $smtpHost ?: (defined('SMTP_HOST') ? SMTP_HOST : null);
+            $smtpUsername = $smtpUsername ?: (defined('SMTP_USERNAME') ? SMTP_USERNAME : null);
+            $smtpPassword = $smtpPassword ?: (defined('SMTP_PASSWORD') ? SMTP_PASSWORD : null);
+            $smtpPort = $smtpPort ?: (defined('SMTP_PORT') ? SMTP_PORT : null);
+            $smtpEncryption = $smtpEncryption ?: (defined('SMTP_ENCRYPTION') ? SMTP_ENCRYPTION : null);
+            $mailFromEmail = $mailFromEmail ?: (defined('MAIL_FROM_EMAIL') ? MAIL_FROM_EMAIL : null);
+            $mailFromName = $mailFromName ?: (defined('MAIL_FROM_NAME') ? MAIL_FROM_NAME : null);
+        }
+
+        // Se autoload existe e temos host/usuário/senha, tenta enviar por PHPMailer
+        if (file_exists($vendorAutoload) && $smtpHost && $smtpUsername && $smtpPassword) {
+            require_once $vendorAutoload;
+            try {
+                $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = $smtpHost;
+                $mail->SMTPAuth = true;
+                $mail->Username = $smtpUsername;
+                $mail->Password = $smtpPassword;
+                $mail->SMTPSecure = $smtpEncryption ?: 'tls';
+                $mail->Port = $smtpPort ? intval($smtpPort) : 587;
+
+                $mail->CharSet = 'UTF-8';
+                $mail->setFrom($mailFromEmail ?: $smtpUsername, $mailFromName ?: 'Reservas');
+                $mail->addAddress($to, $resumo_nome);
+                $mail->Subject = $subject;
+                $mail->isHTML(true);
+                $mail->Body = $message;
+
+                // Opções para TLS/SSL em ambiente local
+                $mail->SMTPOptions = [
+                    'ssl' => [
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    ]
+                ];
+
+                $mail->send();
+                $mailSent = true;
+            } catch (Exception $e) {
+                error_log('PHPMailer error: ' . $e->getMessage());
+                $mailSent = false;
+            }
+        } else {
+            // Fallback para mail()
+            if (!file_exists($vendorAutoload)) {
+                error_log('vendor/autoload.php não encontrado. Usando fallback mail().');
+            } elseif (!($smtpHost && $smtpUsername && $smtpPassword)) {
+                error_log('Configuração SMTP incompleta (env ou config). Usando fallback mail().');
+            }
+            try {
+                $mailSent = @mail($to, $subject, $message, $headers);
+            } catch (Exception $e) {
+                error_log('Erro ao enviar e-mail com mail(): ' . $e->getMessage());
+                $mailSent = false;
+            }
         }
 
         // Monta mensagem final para o frontend

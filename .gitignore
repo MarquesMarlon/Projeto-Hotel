@@ -10,6 +10,9 @@ build/
 vendor/ 
 *.env 
 
+# Ignorar arquivo local de configuração SMTP (credenciais)
+config/smtp_config.php
+
 # IDE / Sistema
 .vscode/
 .DS_Store
