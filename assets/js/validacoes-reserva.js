@@ -2,53 +2,50 @@
 // FUNÇÕES DE UTILIDADE E VALIDAÇÃO
 // ===============================
 
-// Adiciona máscara de CPF (000.000.000-00)
+
 function mascaraCPF(valor) {
-    valor = valor.replace(/\D/g, ""); // Remove tudo que não for dígito
+    valor = valor.replace(/\D/g, ""); 
     valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
     valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
     valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
     return valor;
 }
 
-// Adiciona máscara de Telefone ((00) 00000-0000 ou (00) 0000-0000)
+
 function mascaraTelefone(valor) {
-    valor = valor.replace(/\D/g, ""); // Remove tudo que não for dígito
-    // Formata conforme quantidade de dígitos:
-    // até 10 dígitos: (00) 0000-0000
-    // 11 dígitos: (00) 00000-0000
-    // 12 dígitos: (00) 00000-00000) — aceita mas menos comum
+    valor = valor.replace(/\D/g, ""); 
+
     valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
     if (valor.length <= 13) {
-        // formato (00) 0000-0000 ou (00) 00000-0000
+
         valor = valor.replace(/(\d)(\d{4})$/, "$1-$2");
     } else {
-        // para 12 dígitos formata 5-5
+   
         valor = valor.replace(/(\d)(\d{5})$/, "$1-$2");
     }
     return valor;
 }
 
-// Validação de Telefone: exige entre 11 e 12 dígitos (DDD + número)
+
 function validarTelefone(telefone) {
     if (!telefone) return false;
     const digits = telefone.replace(/\D/g, '');
     return digits.length >= 11 && digits.length <= 12;
 }
 
-// Validação de E-mail
+
 function validarEmail(email) {
-    // Regex simples mas eficaz para a maioria dos emails
+
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
 }
 
-// Validação de Data (Garante que a entrada seja antes da saída)
+
 function validarDatas(entrada, saida) {
     const dataEntrada = new Date(entrada);
     const dataSaida = new Date(saida);
     const hoje = new Date();
-    // Zera horas para comparação
+
     hoje.setHours(0, 0, 0, 0);
 
     if (dataEntrada < hoje) {
@@ -62,3 +59,60 @@ function validarDatas(entrada, saida) {
     }
     return true;
 }
+
+// ===============================
+// Validação de disponibilidade por quarto (consulta ao servidor)
+// ===============================
+// Observações / suposições:
+// - Este código faz uma requisição POST para `controller/processar_reservas.php`
+//   com JSON { action: 'verificar_disponibilidade', quarto, entrada, saida }.
+// - O endpoint deverá retornar JSON { available: boolean, conflicts: [...] }.
+// - Se o endpoint não existir ou falhar, a validação será permissiva (não bloqueia)
+//   para evitar interromper a experiência do usuário. Recomenda-se implementar
+//   o endpoint no servidor para comportamento completo.
+
+async function verificarDisponibilidadeNoServidor(quarto, entrada, saida) {
+    if (!quarto) return true; // sem quarto selecionado, não bloqueia aqui
+    try {
+        // usar caminho relativo para funcionar tanto em /projetohotel/ quanto em subpastas
+        const resp = await fetch('controller/processar_reservas.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'verificar_disponibilidade', quarto, entrada, saida })
+        });
+
+        if (!resp.ok) {
+            // se o servidor retornou erro, não bloquear — log para debug
+            console.warn('Verificação de disponibilidade retornou erro:', resp.status);
+            return true;
+        }
+
+        const data = await resp.json();
+        // espera { available: boolean }
+        if (typeof data.available === 'boolean') {
+            return data.available;
+        }
+        // formato inesperado: não bloquear
+        console.warn('Formato inesperado na verificação de disponibilidade:', data);
+        return true;
+    } catch (err) {
+        console.error('Erro ao verificar disponibilidade no servidor:', err);
+        // Em caso de erro de rede, não bloqueamos a submissão aqui.
+        return true;
+    }
+}
+
+// Função que valida datas (local) e depois checa disponibilidade no servidor.
+// Retorna Promise<boolean>. Uso: if (await validarDatasComDisponibilidade(entrada, saida, quarto)) { ... }
+async function validarDatasComDisponibilidade(entrada, saida, quarto) {
+    if (!validarDatas(entrada, saida)) return false;
+    const disponivel = await verificarDisponibilidadeNoServidor(quarto, entrada, saida);
+    if (!disponivel) {
+        alert('O quarto selecionado já possui reserva nas datas escolhidas. Por favor escolha outras datas ou outro quarto.');
+        return false;
+    }
+    return true;
+}
+
+// Exportar funções para uso em outras scripts (caso o projeto use módulos, senão ficam globais)
+// Em páginas que fazem submit de reserva, chame `await validarDatasComDisponibilidade(checkin, checkout, quarto)`

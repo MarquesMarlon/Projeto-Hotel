@@ -110,10 +110,61 @@ try {
 
     if ($stmt->rowCount() > 0) {
         $lastId = $pdo->lastInsertId();
+        // Preparar conteúdo do e-mail de confirmação
+        $to = $email_cliente;
+        $subject = 'Confirmação de Reserva - Sua Reserva';
+
+        // Valores sanitizados para inclusão no e-mail
+        $resumo_entrada = htmlspecialchars($dados['entrada']);
+        $resumo_saida = htmlspecialchars($dados['saida']);
+        $resumo_nome = htmlspecialchars($nome_cliente);
+        $resumo_quarto = htmlspecialchars($quarto_id);
+        $resumo_adultos = intval($adultos);
+        $resumo_criancas = intval($criancas);
+
+        $message = "<html><body>" .
+            "<h2>Confirmação de Reserva</h2>" .
+            "<p>Olá <strong>{$resumo_nome}</strong>,</p>" .
+            "<p>Sua reserva foi confirmada com sucesso. Abaixo estão os detalhes:</p>" .
+            "<ul>" .
+            "<li><strong>ID da Reserva:</strong> {$lastId}</li>" .
+            "<li><strong>Quarto (ID):</strong> {$resumo_quarto}</li>" .
+            "<li><strong>Entrada:</strong> {$resumo_entrada}</li>" .
+            "<li><strong>Saída:</strong> {$resumo_saida}</li>" .
+            "<li><strong>Adultos:</strong> {$resumo_adultos}</li>" .
+            "<li><strong>Crianças:</strong> {$resumo_criancas}</li>" .
+            "</ul>" .
+            "<p>Se precisar alterar sua reserva, responda a este e-mail ou entre em contato com a recepção.</p>" .
+            "<p>Atenciosamente,<br>Equipe de Reservas</p>" .
+            "</body></html>";
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
+        // Ajuste o From para um e-mail válido do seu domínio/servidor
+        $headers .= "From: Reservas <reservas@seudominio.com>" . "\r\n";
+
+        // Tenta enviar o e-mail. Em muitos ambientes locais (XAMPP) o mail() pode não estar configurado.
+        $mailSent = false;
+        try {
+            $mailSent = @mail($to, $subject, $message, $headers);
+        } catch (Exception $e) {
+            // falha ao chamar mail(); mantém $mailSent = false e loga
+            error_log('Erro ao enviar e-mail de confirmação: ' . $e->getMessage());
+        }
+
+        // Monta mensagem final para o frontend
+        if ($mailSent) {
+            $userMsg = 'Reserva confirmada com sucesso! Olhe seu e-mail, lhe enviamos a confirmação.';
+        } else {
+            $userMsg = 'Reserva confirmada com sucesso! Não foi possível enviar o e-mail de confirmação automaticamente. Por favor, verifique seu e-mail mais tarde ou entre em contato conosco.';
+            // Log do corpo do e-mail para diagnóstico (não exibe ao usuário)
+            error_log("E-mail não enviado para {$to}. Conteúdo: " . $message);
+        }
+
         http_response_code(200);
         echo json_encode([
             'success' => true,
-            'message' => "Reserva confirmada com sucesso!",
+            'message' => $userMsg,
             'id' => $lastId
         ]);
     } else {

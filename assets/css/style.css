@@ -87,17 +87,18 @@ margin: 0;
 /* Box Shadow centroal */
 
 .container-reserva {
+  
   position: relative;
   left: 50%;
   padding: 20px;
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 1146px;
-  background-color: #fff;
   box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   background-color: rgba(193, 155, 118, 1);
+  height: 150px;
 }
 
 .reserva-list {
