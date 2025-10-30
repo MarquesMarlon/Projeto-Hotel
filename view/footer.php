@@ -1,4 +1,6 @@
 
+</div>
+
 <footer>
   <div class="footer-newsletter-wrap">
     <div class="footer-newsletter">

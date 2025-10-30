@@ -10,7 +10,15 @@
 </head>
 
 <body>
-  <?php include 'view/header.php'; ?>
+  <?php
+  session_start();
+  // Protege a área administrativa: redireciona para o login se não estiver autenticado
+  if (!isset($_SESSION['user_id'])) {
+      header('Location: admin-login.php');
+      exit;
+  }
+
+  include 'view/header.php'; ?>
   <div class="container mt-5">
     <div class="text-center mb-5">
       <h2><i>Área Administrativa</i></h2>

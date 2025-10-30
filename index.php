@@ -31,7 +31,7 @@ require_once ROOT_PATH . '/model/reserva.php';
           <li><a href="index.php">Home</a></li>
           <li><a href="sobre.php">Sobre</a></li>
           <li><a href="#">Contato</a></li>
-          <li><a href="#">Login</a></li>
+          <li><a href="admin-login.php">Login</a></li>
           <li><a href="area-adm.php">Área Administrativa</a></li>
         </ul>
       </div>
