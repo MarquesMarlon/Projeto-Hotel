@@ -1,29 +1,32 @@
-<footer>
-  <div class="container-footer">
 
-    <!-- Newsletter -->
-    <div class="newsletter-section">
-      <div class="newsletter">
+<footer>
+  <div class="footer-newsletter-wrap">
+    <div class="footer-newsletter">
+      <div class="left">
         <h4>NEWSLETTER</h4>
-        <p>Never Miss Anything From Construx By Signing Up To Our Newsletter.</p>
+        <p>Never Miss Anything From Sharai — sign up to receive exclusive offers and updates.</p>
       </div>
-      <!-- linha vertical -->
-      <div class="linha-vertical"></div>
-      <!-- input e-mail -->
-      <div class="newsletter-input">
-        <div id="error-message" aria-live="polite"></div> <!-- mensagem de erro -->
-        <form id="email-newsletter">
-          <input id="email-input" type="email" placeholder="Digite seu email">
-          <button>ENVIAR</button>
+
+      <div class="footer-divider" aria-hidden="true"></div>
+
+      <div class="right">
+        <form id="email-newsletter" class="footer-form">
+          <div id="error-message" aria-live="polite" style="position:absolute;left:-9999px;top:auto;"> </div>
+          <input id="email-input" type="email" placeholder="Digite seu email" aria-label="Seu e-mail">
+          <button type="submit">ENVIAR</button>
         </form>
       </div>
     </div>
-    <!-- Newsletter modal (nome e classes alterados para não conflitar com Bootstrap) -->
-    <div id="modal-newsletter" class="newsletter-modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-newsletter-title">
-      <div class="newsletter-modal-content">
-        <h2 id="modal-newsletter-title">Inscrição realizada com sucesso!</h2>
-        <button id="close-modal-news" aria-label="Fechar modal">Fechar</button>
-      </div>
+  </div>
+     <div class="footer-linhaa"></div>
+
+  <!-- Newsletter modal -->
+  <div id="modal-newsletter" class="newsletter-modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-newsletter-title">
+    <div class="newsletter-modal-content">
+      <h2 id="modal-newsletter-title">Inscrição realizada com sucesso!</h2>
+      <button id="close-modal-news" aria-label="Fechar modal">Fechar</button>
     </div>
-    <script src="assets/js/email.js"></script>
+  </div>
+
+  <script src="assets/js/email.js"></script>
 </footer>

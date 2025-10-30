@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projeto</title>
+  <title></title>
   <link rel="stylesheet" href="assets/css/header.css"/>
+  <link rel="stylesheet" href="assets/css/footer.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,11 +27,10 @@
             }
         </style>
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Post detail</a></li>
-          <li><a href="#">Pages</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Shortcodes</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="#">Sobre</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="area-adm.php">Área Administrativa</a></li>
         </ul>
       </div>
     

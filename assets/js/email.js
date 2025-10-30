@@ -55,33 +55,6 @@ function isValidEmail(email) {
 }
 
 // header com Efeito Scroll
-
-(function() {
-    const header = document.querySelector('.container-navbar'); 
-    if(!header) return; 
-
-function onFirstScroll() { 
-    header.classList.add('header-bg');
-}
-document.addEventListener('scroll', onFirstScroll, {passive: true, once: true })
-
-})(); 
-
-(function(){
-    const header = document.querySelector('.container-navbar');
-    if(!header) return;
-
-    function setBodyPadding() {
-        const h = header.offsetHeight;
-        document.body.style.paddingTop = h + 'px';
-    }
-
-    setBodyPadding();
-    window.addEventListener('resize', setBodyPadding);
-
-    function onFirstScroll(){
-        header.classList.add('header-bg');
-    }
-    document.addEventListener('scroll', onFirstScroll, {passive: true, once: true});
-})();
+// Nota: remoção do código de ajuste inline de padding-top no body.
+// O comportamento do header (scroll) é tratado no arquivo `assets/js/header.js`.
 

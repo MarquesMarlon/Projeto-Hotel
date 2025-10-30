@@ -1,0 +1,110 @@
+/* Footer styles moved from view/footer.php */
+.site-footer, footer {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.footer-newsletter-wrap {
+  background: #150E07;
+  color: #fff;
+  padding: 36px 20px;
+  font-family: Roboto, sans-serif;
+}
+.footer-newsletter {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: space-between;
+}
+.footer-newsletter .left {
+  flex: 1 1 50%;
+}
+.footer-newsletter h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.footer-newsletter p {
+  margin: 0;
+  color: #ddd;
+  font-size: 14px;
+  max-width: 520px;
+}
+.footer-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.12);
+}
+.footer-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.footer-form input[type="email"] {
+  padding: 12px 14px;
+  border: none;
+  min-width: 320px;
+  background: #fff;
+  color: #222;
+  border-radius: 2px;
+  outline: none;
+  font-size: 14px;
+}
+.footer-form button {
+  background: #c19b76;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.footer-linha {
+  height: 1px;
+  background: rgb(255, 4, 4);
+  margin: 0;
+  border: none;
+}
+
+@media (max-width: 800px) {
+  .footer-newsletter { flex-direction: column; align-items: stretch; gap: 16px; }
+  .footer-divider { display: none; }
+  .footer-form { justify-content: flex-start; }
+  .footer-form input[type="email"] { min-width: 100%; }
+}
+
+/* Newsletter modal helpers */
+.newsletter-modal,
+.static-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 10000;
+}
+.newsletter-modal .newsletter-modal-content,
+.static-modal .modal-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  max-width: 480px;
+  width: calc(100% - 40px);
+}
+/* Ensure hidden modals are really hidden (defensive) */
+.newsletter-modal.hidden,
+.static-modal.hidden {
+  display: none !important;
+}

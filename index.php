@@ -11,6 +11,7 @@ require_once ROOT_PATH . '/model/reserva.php';
   <title>Projeto</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/header.css" />
    <link rel="stylesheet" href="assets/css/modal-reserva.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,11 +28,11 @@ require_once ROOT_PATH . '/model/reserva.php';
       <div class="container-navbar">
         <img src="assets/img/logo-header.png" alt="sharai" class="logo-navbar" />
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Sobre</a></li>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="sobre.php">Sobre</a></li>
           <li><a href="#">Contato</a></li>
           <li><a href="#">Login</a></li>
-          <li><a href="#">Área Administrativa</a></li>
+          <li><a href="area-adm.php">Área Administrativa</a></li>
         </ul>
       </div>
     </div>
@@ -47,11 +48,11 @@ require_once ROOT_PATH . '/model/reserva.php';
           <label for="dataEntrada">Entrada/Saida </label>
           <div class="input-grupo">
             <span class="seta">➜</span>
-            <input type="date" id="reserva-entrada" placeholder="Entrada" required>
+            <input type="text" id="reserva-entrada" class="date-field" placeholder="Entrada" required>
 
 
             <span class="seta">➜</span>
-            <input type="date" id="reserva-saida" placeholder="Saida" required>
+            <input type="text" id="reserva-saida" class="date-field" placeholder="Saida" required>
           </div>
         </div>
       </div>
@@ -158,7 +159,7 @@ require_once ROOT_PATH . '/model/reserva.php';
         </div>
       </div>
 
-      <button class="more-info-button">SAIBA MAIS
+      <button class="more-info-button" onclick="window.location.href='reserva-form'">SAIBA MAIS
         <div class="info-traco"></div>
       </button>
     </div>
@@ -345,7 +346,6 @@ require_once ROOT_PATH . '/model/reserva.php';
   <div class="direitos">
     <p>© 2024 Your Company. Designed By Jafe</p>
   </div>
-  <!-- modal estático renomeado para evitar conflito com Bootstrap (.modal) -->
   <div id="modal" class="static-modal hidden" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
     <div class="modal-content">
       <h2 id="modal-title">Inscrição realizada com sucesso!</h2>
@@ -353,6 +353,8 @@ require_once ROOT_PATH . '/model/reserva.php';
     </div>
   </div>
   <script src="assets/js/validacoes-reserva.js"></script>
+  <script src="assets/js/header.js"></script>
+  <script src="assets/js/datepicker.js"></script>
   <script src="assets/js/reserva.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/email.js"></script>

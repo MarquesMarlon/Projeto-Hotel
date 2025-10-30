@@ -1,7 +1,6 @@
-<!-- Este arquivo aqui é o cerebro das RESERVAS -->
-
 <?php
 require_once 'config/conexaobd.php';
+
 class Reserva
 {
     private $pdo;
@@ -26,6 +25,3 @@ class Reserva
         return $stmt->fetch();
     }
 }
-
-
-?>
