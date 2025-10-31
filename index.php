@@ -18,7 +18,7 @@ require_once ROOT_PATH . '/model/reserva.php';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/correcao-modal.css">
+  
 </head>
 <!-- NAVBAR-->
 
@@ -30,7 +30,7 @@ require_once ROOT_PATH . '/model/reserva.php';
         <ul class="nav-links">
           <li><a href="index.php">Home</a></li>
           <li><a href="sobre.php">Sobre</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="contato.php">Contato</a></li>
           <li><a href="admin-login.php">Login</a></li>
           <li><a href="area-adm.php">Área Administrativa</a></li>
         </ul>
@@ -45,7 +45,7 @@ require_once ROOT_PATH . '/model/reserva.php';
       <div class="reserva-list">
         <div class="list-item">
 
-          <label for="dataEntrada">Entrada/Saida </label>
+          <label for="dataEntrada"><b>Entrada/Saida</b> </label>
           <div class="input-grupo">
             <span class="seta">➜</span>
             <input type="text" id="reserva-entrada" class="date-field" placeholder="Entrada" required>
@@ -57,7 +57,7 @@ require_once ROOT_PATH . '/model/reserva.php';
         </div>
       </div>
       <div class="list-item">
-        <label for="quarto">Quarto</label>
+        <label for="quarto"><b>Quarto</b></label>
         <select name="reserva-quarto" class="reserva-quarto" required>
           <option value="">Selecione o quarto</option>
           <?php
@@ -76,7 +76,7 @@ require_once ROOT_PATH . '/model/reserva.php';
       </div>
 
       <div class="list-item">
-        <label for="">Adulto</label>
+        <label for=""><b>Adulto</b></label>
         <select name="reserva-adulto" id="" class="reserva-adulto" required>
           <option value="">Selecione</option>
           <option value="1">1</option>
@@ -87,7 +87,7 @@ require_once ROOT_PATH . '/model/reserva.php';
       </div>
 
       <div class="list-item">
-        <label for="crianca">Criança</label>
+        <label for="crianca"><b>Criança</b></label>
         <select name="reserva-crianca" id="" class="reserva-crianca" required>
           <option value="">Selecione</option>
           <option value="0">0</option>
@@ -159,9 +159,9 @@ require_once ROOT_PATH . '/model/reserva.php';
         </div>
       </div>
 
-      <button class="more-info-button" onclick="window.location.href='reserva-form'">SAIBA MAIS
-        <div class="info-traco"></div>
-      </button>
+    <a class="more-info-button" href="#reserva-form">SAIBA MAIS
+      <div class="info-traco"></div>
+    </a>
     </div>
 
     <div class="cocontainer-central image">
@@ -199,10 +199,10 @@ require_once ROOT_PATH . '/model/reserva.php';
               <span class="acomodacao-preco">R$ 299,00/NOITE</span>
             </div>
             <div class="acomodacao-detalhes">
-              <span> <img src="assets/img/acomodacoes/icon-seta.png" alt="icon-info"> tamanho 30m² </span>
-              <span> <img src="assets/img/acomodacoes/icon-sticker.svg" class="icon-info"> Adultos: 3 </span>
+              <span class="icon-info"> <img src="assets/img/acomodacoes/icon-seta.png" alt="icon-info"> tamanho 30m² </span>
+              <span class="icon-info"> <img src="assets/img/acomodacoes/icon-sticker.svg" alt="icon-info"> Adultos: 3 </span>
             </div>
-            <button class="acomodacao-btn">SAIBA MAIS</button>
+            <a class="acomodacao-btn" href="#reserva-form">SAIBA MAIS</a>
           </div>
         </div>
       </div>
@@ -217,10 +217,10 @@ require_once ROOT_PATH . '/model/reserva.php';
               <span class="acomodacao-preco">R$ 199,00/NOITE</span>
             </div>
             <div class="acomodacao-detalhes">
-              <span> <img src="assets/img/acomodacoes/icon-seta.png" class="icon-info"> tamanho 30m² </span>
-              <span> <img src="assets/img/acomodacoes/icon-sticker.svg" class="icon-info"> Adultos: 3 </span>
+              <span class="icon-info"> <img src="assets/img/acomodacoes/icon-seta.png"> tamanho 30m² </span>
+              <span class="icon-info"> <img src="assets/img/acomodacoes/icon-sticker.svg"> Adultos: 3 </span>
             </div>
-            <button class="acomodacao-btn">SAIBA MAIS</button>
+            <a class="acomodacao-btn" href="#reserva-form">SAIBA MAIS</a>
           </div>
         </div>
       </div>
@@ -235,10 +235,10 @@ require_once ROOT_PATH . '/model/reserva.php';
               <span class="acomodacao-preco">R$ 299,00/NOITE</span>
             </div>
             <div class="acomodacao-detalhes">
-              <span> <img src="assets/img/acomodacoes/icon-seta.png" class="icon-info"> tamanho 30m² </span>
-              <span> <img src="assets/img/acomodacoes/icon-sticker.svg" class="icon-info"> Adultos: 3 </span>
+              <span class="icon-info"> <img src="assets/img/acomodacoes/icon-seta.png" alt="icon-info"> tamanho 30m² </span>
+              <span class="icon-info"> <img src="assets/img/acomodacoes/icon-sticker.svg" alt="icon-info"> Adultos: 3 </span>
             </div>
-            <button class="acomodacao-btn">SAIBA MAIS</button>
+            <a class="acomodacao-btn" href="#reserva-form">SAIBA MAIS</a>
           </div>
         </div>
       </div>
@@ -293,7 +293,7 @@ require_once ROOT_PATH . '/model/reserva.php';
         <div class="footer-links">
           <h5>LINKS</h5>
           <ul>
-            <li><a href="#">ABOUT</a></li>
+            <li><a href="sobre.php">ABOUT</a></li>
             <li><a href="#">GALLERY</a></li>
             <li><a href="#">BLOG</a></li>
             <li><a href="#">PORTFOLIO</a></li>

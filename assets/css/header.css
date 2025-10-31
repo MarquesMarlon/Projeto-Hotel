@@ -1,20 +1,16 @@
 
 
-/* Header / Banner (limpo) */
-
-/* Banner da página (imagem de topo). Mantemos margin-top:0 para garantir
-   que fique colada ao topo da janela. */
 .banner {
   background-image: url("../img/banner-1.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 600px; /* reduzir valor para performance; ajuste conforme necessidade */
+  min-height: 600px; 
   margin-top: 0;
 }
 
-/* Navbar fixa no topo. Estrutura simples e responsiva. */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -69,7 +65,7 @@
 
 .nav-links li a:hover { color: #c19b76; transition: color 0.3s; }
 
-/* Estado após scroll: fundo, padding reduzido e sombra */
+
 .navbar.header-bg {
   background: rgba(13, 9, 4, 0.95);
   padding: 8px 0;
@@ -79,7 +75,7 @@
 
 .navbar.header-bg .logo-navbar { width: 110px; height: 22px; }
 
-/* Responsividade */
+
 @media (max-width: 900px) {
   .nav-links { gap: 12px; }
   .nav-links li a { font-size: 13px; letter-spacing: 1px; }
@@ -92,6 +88,3 @@
   .container-navbar { padding: 0 12px; }
   .logo-navbar { width: 100px; height: 20px; }
 }
-
-/* Fim do CSS específico do header. Mantivemos o arquivo enxuto; regras de
-   layout geral, cards e footer devem ficar em `style.css`. */

@@ -13,6 +13,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet" />
 
+  <?php if (isset($page_css) && $page_css): ?>
+    <link rel="stylesheet" href="<?= htmlspecialchars($page_css) ?>" />
+  <?php endif; ?>
+
+  <?php if (isset($page_footer_css) && $page_footer_css): ?>
+    <link rel="stylesheet" href="<?= htmlspecialchars($page_footer_css) ?>" />
+  <?php endif; ?>
+
 </head>
 <!-- NAVBAR-->
 
@@ -28,12 +36,11 @@
         </style>
         <ul class="nav-links">
           <li><a href="index.php">Home</a></li>
-          <li><a href="#">Sobre</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="sobre.php">Sobre</a></li>
+          <li><a href="contato.php">Contato</a></li>
           <li><a href="area-adm.php">Área Administrativa</a></li>
         </ul>
       </div>
-    
   </div>
 </header>
 <div class="page-content">

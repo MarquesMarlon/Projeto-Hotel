@@ -1,0 +1,42 @@
+/* CSS exclusivo para a página Sobre - isolado para evitar conflitos */
+:root { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+/* Wrapper específico - evita tocar em regras globais */
+.sobre-page {
+  max-width: 1100px;
+  margin: 0 auto; /* centraliza conteúdo */
+  padding: 130px 20px 40px; /* top para compensar header fixo */
+  color: #6b6b6b;
+  font-family: Roboto, sans-serif;
+}
+
+.sobre-page h1 {
+  font-family: 'DM Serif Text', serif;
+  font-size: 36px;
+  color: #262423;
+  margin: 0 0 16px 0;
+}
+
+.sobre-page p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 12px 0;
+  max-width: 800px;
+}
+
+.sobre-page .btn-home {
+  display: inline-block;
+  margin-top: 18px;
+  background: #c19b76;
+  color: #fff;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+/* Responsividade: reduzir padding-top em telas pequenas */
+@media (max-width: 600px) {
+  .sobre-page { padding-top: 90px; }
+  .sobre-page h1 { font-size: 28px; }
+}

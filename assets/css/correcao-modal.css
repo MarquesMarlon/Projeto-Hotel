@@ -13,3 +13,6 @@ label {
   color: #000 !important;
 }
 
+body {
+padding-top: 80px; 
+}

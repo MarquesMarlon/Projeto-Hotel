@@ -1,0 +1,24 @@
+
+.footer-newsletter-wrap {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+.footer-newsletter {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+}
+.container-footer {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.direitos {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 800px) {
+  .footer-newsletter { padding-left: 18px !important; padding-right: 18px !important; }
+}
+
+body {
+  margin: 0;
+}

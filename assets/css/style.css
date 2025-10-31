@@ -11,6 +11,9 @@ body {
   padding: 0;
 }
 
+/* Evita overflow horizontal que gera espaços em branco laterais */
+html, body { overflow-x: hidden; }
+
 /* Barra de Cima */
 
 .banner {
@@ -87,11 +90,10 @@ margin: 0;
 /* Box Shadow centroal */
 
 .container-reserva {
-  
+  /* Centraliza o container sem usar transform/left que podem causar overflow */
   position: relative;
-  left: 50%;
+  margin: 0 auto;
   padding: 20px;
-  transform: translate(-50%, -50%);
   width: 100%;
   max-width: 1146px;
   box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.2);
@@ -99,6 +101,9 @@ margin: 0;
   align-items: center;
   background-color: rgba(193, 155, 118, 1);
   height: 150px;
+  margin-top: -79px; 
+  z-index: 50;
+  border-radius: 4px;
 }
 
 .reserva-list {
@@ -253,6 +258,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   vertical-align: middle;
   text-transform: uppercase;
   margin: 25px 0 0 20px;
+  padding: 5px;
 }
 
 #list-botom:hover {
@@ -540,6 +546,7 @@ label {
 }
 
 .acomodacao-border {
+  margin-left: 20px;
   height: auto;
   width: 100%;
   position: relative;
@@ -582,26 +589,30 @@ label {
 }
 
 .icon-info {
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
   margin-right: 4px;
   padding: 0 2px;
+  position: relative; 
+  transform: translateY(-18px); 
 }
-
 .acomodacao-btn {
   background: #c19b76;
   color: #fff;
   border: none;
-  padding: 12px 32px;
-  font-size: 14px;
+  padding: 8px 13px;
+  font-size: 13px;
   font-family: Roboto, sans-serif;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.3s;
   align-self: flex-end;
-  top: -50px;
-  margin-right: 20px;
+  align-items: center;
   text-transform: uppercase;
   position: relative;
   z-index: 2;
+  transform: translateY(-36px);
 }
 
 .acomodacao-btn:hover {
@@ -612,18 +623,19 @@ label {
 footer {
   background-color: #150E07;
   color: #fff;
-  padding: 40px 20px;
+  padding: 40px 0; /* padding vertical apenas; horizontal controlado pelo container */
   font-family: Arial, sans-serif;
-  margin-top: 300px;
+  margin-top: 0; /* remover grande espaço acima do footer */
 }
 
 .container-footer {
-  max-width: 1200px;
-  margin: 0 auto;
+  /* permitir que o footer preencha a largura da viewport sem criar grandes margens laterais */
+  max-width: none;
+  margin: 0;
   width: 100%;
   text-align: center;
-  padding: 20px;
-
+  padding: 20px 40px;
+  box-sizing: border-box;
 }
 
 .newsletter-section {
@@ -665,7 +677,8 @@ footer {
   padding: 10px;
   border: none;
   outline: none;
-  min-width: 250px;
+  min-width: 320px;
+  max-width: 380px;
 }
 
 .newsletter-input button {
@@ -722,7 +735,7 @@ footer {
 .footer-links ul,
 .footer-acomodacoes ul {
   list-style: none;
-  padding: 50px;
+  padding: 0; /* remover padding que criava espaços horizontais extras */
   margin: 0;
 }
 
@@ -815,4 +828,8 @@ footer {
 
 .hidden {
   display: none;
+}
+
+a {
+  text-decoration: none;
 }

@@ -34,8 +34,31 @@ function isValidEmail(email) {
         return;
     }
         errorMessage.textContent = '';
-        form.reset();
-        if (modal) showModal();
+   
+        alert('E-mail válido, Aguarde um momento, Enviando confirmação para ' + email + '.');
+
+        
+        fetch('/projetohotel/controller/newsletter.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.success) {
+                alert('E-mail de confirmação enviado com sucesso para: ' + email);
+            } else {
+                alert('Falha ao enviar e-mail: ' + (data && data.error ? data.error : 'erro desconhecido'));
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Erro na requisição: ' + err.message);
+        })
+        .finally(() => {
+            form.reset();
+            if (modal) showModal();
+        });
     });
 
     function showModal() {
@@ -54,7 +77,4 @@ function isValidEmail(email) {
     }
 }
 
-// header com Efeito Scroll
-// Nota: remoção do código de ajuste inline de padding-top no body.
-// O comportamento do header (scroll) é tratado no arquivo `assets/js/header.js`.
 
