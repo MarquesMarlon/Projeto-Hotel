@@ -3,7 +3,6 @@
 $action = $_GET['action'] ?? 'indefinida';
 $type = $_GET['type'] ?? 'quarto';
 
-// mensagens padrão para quartos
 $mensagens_quarto = [
     'create' => 'Quarto cadastrado com sucesso!',
     'update' => 'Quarto atualizado com sucesso!',
@@ -11,7 +10,6 @@ $mensagens_quarto = [
     'indefinida' => 'Operação realizada com sucesso!'
 ];
 
-// mensagens para reservas
 $mensagens_reserva = [
     'create' => 'Reserva cadastrada com sucesso!',
     'update' => 'Reserva atualizada com sucesso!',
@@ -34,7 +32,7 @@ if ($type === 'reserva') {
    <link rel="stylesheet" href="assets/css/sucesso.css" />
    <title>Sucesso</title>
    <style>
-      /* pequenos ajustes inline para garantir visual mínimo caso CSS não carregue */
+    
       .sucesso-container{ text-align:center; padding:2rem; }
       .buttons-container{ display:flex; gap:1rem; justify-content:center; margin-top:1rem; }
       .ver-reservas, .cadastrar-novo-reserva, .ver-quartos, .cadastrar-novo{ padding:0.6rem 1rem; border-radius:6px; border:none; cursor:pointer; }

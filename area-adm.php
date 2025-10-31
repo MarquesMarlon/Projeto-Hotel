@@ -13,7 +13,6 @@
 <body>
   <?php
   session_start();
-  // Protege a área administrativa: redireciona para o login se não estiver autenticado
   if (!isset($_SESSION['user_id'])) {
       header('Location: admin-login.php');
       exit;
@@ -25,24 +24,23 @@
       <h2><i>Área Administrativa</i></h2>
     </div>
 
-    <!-- Linha com 3 colunas -->
+
     <div class="row text-center">
 
-      <!-- COLUNA 1 - Quartos -->
+
       <div class="col-md-4 mb-4">
         <h3>Quartos</h3>
         <a href="quarto.php" class="btn btn-primary w-75 my-2">Cadastrar Novo Quarto</a>
         <a href="quartos-gerenciar.php" class="btn btn-primary w-75 my-2">Gerenciar Quartos</a>
       </div>
 
-      <!-- COLUNA 2 - Reservas -->
+
       <div class="col-md-4 mb-4">
         <h3>Reservas</h3>
         <a href="reserva.php" class="btn btn-primary w-75 my-2">Cadastrar Nova Reserva</a>
         <a href="reservas-gerenciar.php" class="btn btn-primary w-75 my-2">Gerenciar Reservas</a>
       </div>
 
-      <!-- COLUNA 3 - Usuários -->
       <div class="col-md-4 mb-4">
         <h3>Usuários</h3>
         <a href="usuarios-gerenciar.php" class="btn btn-primary w-75 my-2">Gerenciar Usuários</a>

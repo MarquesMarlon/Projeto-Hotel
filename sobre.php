@@ -1,6 +1,5 @@
 <?php
 define('ROOT_PATH', __DIR__);
-// pedir ao header que inclua o CSS específico desta página (CSS exclusivo, novo)
 $page_css = 'assets/css/sobre-page.css';
 $page_footer_css = 'assets/css/footer-sobre.css';
 require_once ROOT_PATH . '/view/header.php';

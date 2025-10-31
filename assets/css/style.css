@@ -11,10 +11,8 @@ body {
   padding: 0;
 }
 
-/* Evita overflow horizontal que gera espaços em branco laterais */
 html, body { overflow-x: hidden; }
 
-/* Barra de Cima */
 
 .banner {
   background-image: url("../img/banner-1.png");
@@ -87,10 +85,10 @@ margin: 0;
   transition: 0.8s;
 }
 
-/* Box Shadow centroal */
+
 
 .container-reserva {
-  /* Centraliza o container sem usar transform/left que podem causar overflow */
+
   position: relative;
   margin: 0 auto;
   padding: 20px;
@@ -140,10 +138,10 @@ margin: 0;
   font-size: 13px;
   border: none;
   box-shadow: none;
-  /* ícone de calendário antigo removido para usar somente o botão overlay */
+  
 }
 
-/* botão overlay criado dinamicamente pelo datepicker.js */
+
 .date-wrapper { display: inline-block; }
 .date-wrapper .calendar-overlay {
   position: absolute;
@@ -210,15 +208,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 91px;
   height: 38px;
   appearance: none;
-  /* Remove estilo padrão */
   background-color: white;
   border: none;
   padding: 10px 40px 10px 12px;
-  /* Espaço interno */
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
   background-position: right 12px center;
-  /* seta afastada da borda */
 }
 
 .list-item select {
@@ -463,11 +458,9 @@ label {
 .text-acomodacao-g {
   font-size: 100px;
   color: rgba(0, 0, 0, 0.05);
-  /* texto bem claro ao fundo */
   font-weight: bold;
   text-transform: uppercase;
   pointer-events: none;
-  /* impede que interfira no clique */
   letter-spacing: -1px;
 }
 
@@ -623,13 +616,12 @@ label {
 footer {
   background-color: #150E07;
   color: #fff;
-  padding: 40px 0; /* padding vertical apenas; horizontal controlado pelo container */
+  padding: 40px 0; 
   font-family: Arial, sans-serif;
-  margin-top: 0; /* remover grande espaço acima do footer */
+  margin-top: 0; 
 }
 
 .container-footer {
-  /* permitir que o footer preencha a largura da viewport sem criar grandes margens laterais */
   max-width: none;
   margin: 0;
   width: 100%;
@@ -735,7 +727,7 @@ footer {
 .footer-links ul,
 .footer-acomodacoes ul {
   list-style: none;
-  padding: 0; /* remover padding que criava espaços horizontais extras */
+  padding: 0; 
   margin: 0;
 }
 

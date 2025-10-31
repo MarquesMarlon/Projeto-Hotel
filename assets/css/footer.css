@@ -1,4 +1,4 @@
-/* Footer styles moved from view/footer.php */
+
 .site-footer, footer {
   margin: 0;
   padding: 0;
@@ -103,13 +103,13 @@
   max-width: 480px;
   width: calc(100% - 40px);
 }
-/* Ensure hidden modals are really hidden (defensive) */
+
 .newsletter-modal.hidden,
 .static-modal.hidden {
   display: none !important;
 }
 
-/* Layout base para manter o footer no final da página */
+
 html, body { height: 100%; }
 body { display: flex; flex-direction: column; min-height: 100vh; }
 .page-content { flex: 1 0 auto; }

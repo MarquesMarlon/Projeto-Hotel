@@ -1,8 +1,8 @@
 <?php
-// Endpoint para envio de newsletter/confirmacao para o e-mail informado pelo frontend
+
 header('Content-Type: application/json; charset=utf-8');
 
-// permite POST JSON
+
 $raw = file_get_contents('php://input');
 $data = json_decode($raw, true);
 $email = $data['email'] ?? null;

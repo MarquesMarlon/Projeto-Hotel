@@ -1,12 +1,12 @@
-/* CSS exclusivo para a página Sobre - isolado para evitar conflitos */
+
 :root { box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
 
-/* Wrapper específico - evita tocar em regras globais */
+
 .sobre-page {
   max-width: 1100px;
-  margin: 0 auto; /* centraliza conteúdo */
-  padding: 130px 20px 40px; /* top para compensar header fixo */
+  margin: 0 auto; 
+  padding: 130px 20px 40px; 
   color: #6b6b6b;
   font-family: Roboto, sans-serif;
 }
@@ -35,7 +35,7 @@
   border-radius: 4px;
 }
 
-/* Responsividade: reduzir padding-top em telas pequenas */
+
 @media (max-width: 600px) {
   .sobre-page { padding-top: 90px; }
   .sobre-page h1 { font-size: 28px; }

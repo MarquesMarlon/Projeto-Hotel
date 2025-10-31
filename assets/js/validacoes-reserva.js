@@ -72,9 +72,9 @@ function validarDatas(entrada, saida) {
 //   o endpoint no servidor para comportamento completo.
 
 async function verificarDisponibilidadeNoServidor(quarto, entrada, saida) {
-    if (!quarto) return true; // sem quarto selecionado, não bloqueia aqui
+    if (!quarto) return true; 
     try {
-        // usar caminho relativo para funcionar tanto em /projetohotel/ quanto em subpastas
+       
         const resp = await fetch('controller/processar_reservas.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -82,22 +82,19 @@ async function verificarDisponibilidadeNoServidor(quarto, entrada, saida) {
         });
 
         if (!resp.ok) {
-            // se o servidor retornou erro, não bloquear — log para debug
             console.warn('Verificação de disponibilidade retornou erro:', resp.status);
             return true;
         }
 
         const data = await resp.json();
-        // espera { available: boolean }
         if (typeof data.available === 'boolean') {
             return data.available;
         }
-        // formato inesperado: não bloquear
+
         console.warn('Formato inesperado na verificação de disponibilidade:', data);
         return true;
     } catch (err) {
         console.error('Erro ao verificar disponibilidade no servidor:', err);
-        // Em caso de erro de rede, não bloqueamos a submissão aqui.
         return true;
     }
 }
@@ -114,5 +111,3 @@ async function validarDatasComDisponibilidade(entrada, saida, quarto) {
     return true;
 }
 
-// Exportar funções para uso em outras scripts (caso o projeto use módulos, senão ficam globais)
-// Em páginas que fazem submit de reserva, chame `await validarDatasComDisponibilidade(checkin, checkout, quarto)`

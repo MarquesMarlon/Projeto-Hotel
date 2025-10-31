@@ -17,7 +17,6 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <?php include 'view/header.php'; ?>
 
-  <!-- Ajuste local: adiciona espaçamento superior para não ser coberto pelo header fixo -->
   <div class="container mt-5" style="padding-top:100px;">
     <div class="row justify-content-center">
       <div class="col-md-6">

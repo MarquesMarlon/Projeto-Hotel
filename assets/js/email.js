@@ -1,15 +1,14 @@
-//primeiro vou criar variáveis para receber os valores e manipular os dados
+
 
 const form = document.getElementById('email-newsletter');
 const inputEmail = document.getElementById('email-input');
 const errorMessage = document.getElementById('error-message');
-// Newsletter modal elements renamed to avoid Bootstrap conflict
+
 const modal = document.getElementById('modal-newsletter');
 const closeModalBtn = document.getElementById('close-modal-news');
 
-// If elements missing on the current page, don't run the newsletter logic
 if (!form || !inputEmail || !errorMessage) {
-    // nothing to do on pages without newsletter
+ 
 } else {
 
 function isValidEmail(email) {

@@ -55,12 +55,12 @@ require_once 'config/conexaobd.php'
             $conexao = new Conexao();
             $pdo = $conexao->getPdo();
 
-            // carregar lista de quartos ativos para o modal (select)
+         
             $quartosStmt = $pdo->prepare("SELECT id, nome FROM quartos WHERE ativo = 1 ORDER BY nome ASC");
             $quartosStmt->execute();
             $quartosList = $quartosStmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // buscar reservas com dados do quarto (nome e número) via JOIN
+        
             $sql = "SELECT r.*, q.nome AS quarto_nome, q.numero AS quarto_numero FROM reservas r LEFT JOIN quartos q ON r.quarto_id = q.id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
@@ -69,9 +69,7 @@ require_once 'config/conexaobd.php'
                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                   echo "<tr>";
                   echo "<td>" . $row['id'] . "</td>";
-                  // nome do quarto (vindo da tabela quartos)
                   echo "<td>" . htmlspecialchars($row['quarto_nome'] ?? '', ENT_QUOTES, 'UTF-8') . "</td>";
-                  // número do quarto (fallback para quarto_id caso não exista)
                   $numeroQuarto = isset($row['quarto_numero']) && $row['quarto_numero'] !== null ? $row['quarto_numero'] : $row['quarto_id'];
                   echo "<td>" . htmlspecialchars($numeroQuarto, ENT_QUOTES, 'UTF-8') . "</td>";
                   echo "<td>" . htmlspecialchars($row['nome_cliente'], ENT_QUOTES, 'UTF-8') . "</td>";
@@ -91,7 +89,7 @@ require_once 'config/conexaobd.php'
                   echo "<td>" . $row['cpf'] . "</td>";
                   echo "<td>" . htmlspecialchars($row['email'], ENT_QUOTES, 'UTF-8') . "</td>";
 
-                  // botão editar com atributos data-* para popular o modal
+
                   $dataAttr = '';
                   $dataAttr .= " data-id='" . $row['id'] . "'";
                   $dataAttr .= " data-quarto='" . htmlspecialchars($row['quarto_id'], ENT_QUOTES, 'UTF-8') . "'";
